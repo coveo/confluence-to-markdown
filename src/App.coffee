@@ -63,7 +63,7 @@ class App
   ###
   convertPage: (page, dirIn, dirOut, pages) ->
     @logger.info 'Parsing ... ' + page.path
-    text = '---<br>layout: coveo-docs-standard-page<br>title: ' + page.getHeading() + '<br>categories: migrated<br>---' + page.getTextToConvert pages
+    text = '---<br>layout: content-2-panel<br>title: ' + page.getHeading() + '<br>categories: migrated<br>---' + page.getTextToConvert pages
     fullOutFileName = @_path.join dirOut, page.space, page.fileNameNew
 
     @logger.info 'Making Markdown ... ' + fullOutFileName
