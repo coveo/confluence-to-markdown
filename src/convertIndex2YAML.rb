@@ -16,27 +16,31 @@ preambule = %(# Section Table of Content
 # List all items to include in the TOC from a folder in the desired hierarchy with the following syntax:
 # entries:
 # - title: The TOC Entry Text                             # Can be different from the page.title
-#   path: full/relative/path/with/the/filename.html
+#   path: /full/path/with/the/filename.html
 #   subentries:                                           # When the entry has subentries
 
 entries:
 )
 
 EntryPattern = /^(\s*)[-]\s\s\s\[([^\]]+)\]\(([^)]+)\)/     # REGEX matching the lines with markdown links and capturing indentation, title and path
-prevIndentLength = 0
+prevIndentLength = 4
 prevIndent = ""
+first = true
 # Opening and writing to the target file
 File.open(targetFile, 'w') do |f|
     f.puts preambule
     # Opening and rending the source file 
     File.open(sourceFile, "r").each_line do |line|
+        # Do nothing with the first link (Confluence space root file that we do not want to reproduce in TOC)
+        if (line =~ EntryPattern and first)
+            first = false
         # Write only for lines matchning the REGEX
-        if (line =~ EntryPattern)
+        elsif (line =~ EntryPattern )
             # Get the line useful elements
             indent, title, path = line.match(EntryPattern).captures
             # Source file indentation is twice what it should be in the YAML output
             indentLength = indent.length/2
-            halfIndent = indent[0,indentLength]
+            halfIndent = indent[0,indentLength-2]
             # Add 'subentries' when indent increases
             if (indentLength > prevIndentLength)
                 f.puts prevIndent + "  subentries:"
