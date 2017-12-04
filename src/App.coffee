@@ -2,18 +2,21 @@ class App
 
   # @link http://hackage.haskell.org/package/pandoc For options description
   @outputTypesAdd = [
-    'markdown_github' # use GitHub markdown variant
+    'markdown_github'     # use GitHub markdown variant
     'blank_before_header' # insert blank line before header
 #    'mmd_link_attributes' # use MD syntax for images and links instead of HTML
-    'link_attributes' # use MD syntax for images and links instead of HTML
+    'link_attributes'     # use MD syntax for images and links instead of HTML
+#    'native_divs'         # Includes all original divs in the output
+    'fenced_divs'  
   ]
 
   @outputTypesRemove = [
   ]
 
   @extraOptions = [
-    '--atx-headers' # Setext-style headers (underlined) | ATX-style headers (prefixed with hashes)
-    '--wrap=preserve'
+    '--atx-headers'     # Setext-style headers (underlined) | ATX-style headers (prefixed with hashes)
+    '--wrap=preserve'   # Prevents wrapping all lines at 72 characters which causes several issues
+    # '--section-divs'    # Wrapping each section in a DIV with identifiers 
   ]
 
   ###*
