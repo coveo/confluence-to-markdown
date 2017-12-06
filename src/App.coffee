@@ -6,8 +6,7 @@ class App
     'blank_before_header' # insert blank line before header
 #    'mmd_link_attributes' # use MD syntax for images and links instead of HTML
     'link_attributes'     # use MD syntax for images and links instead of HTML
-#    'native_divs'         # Includes all original divs in the output
-    'fenced_divs'  
+    'fenced_divs'         # Fenced divs are easier to process than HTML DIV (native_divs)
   ]
 
   @outputTypesRemove = [
